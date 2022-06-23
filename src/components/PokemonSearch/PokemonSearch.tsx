@@ -1,10 +1,9 @@
-import React from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-type Props = {
-  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-};
-
-const PokemonSearch = ({ onChange = () => {} }: Props) => {
+const PokemonSearch = () => {
+  const navigate = useNavigate();
+  const [id, setId] = useState("1");
   return (
     <div
       style={{
@@ -15,7 +14,7 @@ const PokemonSearch = ({ onChange = () => {} }: Props) => {
       }}
     >
       <label htmlFor="searchBar">Search</label>
-      <select id="searchBar" onChange={(e) => onChange(e)}>
+      <select id="searchBar" onChange={(e) => setId(e.target.value)}>
         <option value="1">Bulbasaur</option>
         <option value="2">Ivysaur</option>
         <option value="3">Venusaur</option>
@@ -26,6 +25,7 @@ const PokemonSearch = ({ onChange = () => {} }: Props) => {
         <option value="8">Wartortle</option>
         <option value="9">Blastoise</option>
       </select>
+      <button onClick={() => navigate(`/pokemon/${id}`)}>Go</button>
     </div>
   );
 };

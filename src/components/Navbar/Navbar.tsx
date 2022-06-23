@@ -1,5 +1,6 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import PokemonSearch from "./PokemonSearch/PokemonSearch";
+import PokemonSearch from "../PokemonSearch/PokemonSearch";
 
 const StyledNavbar = styled.nav`
   display: flex;
@@ -15,17 +16,17 @@ const Links = styled.ul`
   list-style: none;
 `;
 
-const Navbar = ({ onChange }: { onChange: (e: any) => void }) => {
+const Navbar = () => {
   return (
     <StyledNavbar>
       <h1>Pokedex</h1>
-      <PokemonSearch onChange={onChange} />
+      <PokemonSearch />
       <Links>
         <li>
-          <a href="/">Home</a>
+          <Link to="/">Home</Link>
         </li>
         <li>
-          <a href="/">Random</a>
+          <Link to="/">Random</Link>
         </li>
       </Links>
     </StyledNavbar>
