@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import PokemonSearch from "./PokemonSearch/PokemonSearch";
 
 const StyledNavbar = styled.nav`
   display: flex;
@@ -14,24 +15,11 @@ const Links = styled.ul`
   list-style: none;
 `;
 
-const Navbar = () => {
+const Navbar = ({ onChange }: { onChange: (e: any) => void }) => {
   return (
     <StyledNavbar>
       <h1>Pokedex</h1>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <label htmlFor="searchBar">Search</label>
-        <select id="searchBar">
-          <option value="1">Bulbasaur</option>
-          <option value="4">Charmander</option>
-          <option value="7">Squirtle</option>
-        </select>
-      </div>
+      <PokemonSearch onChange={onChange} />
       <Links>
         <li>
           <a href="/">Home</a>
