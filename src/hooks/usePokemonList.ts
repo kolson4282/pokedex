@@ -1,14 +1,15 @@
+import { useQuery } from "react-query";
+
 export const usePokemonList = () => {
-  //TODO: Replace with useQuery
-  return [
-    { id: 1, name: "bulbasaur" },
-    { id: 2, name: "Ivysaur" },
-    { id: 3, name: "Venusaur" },
-    { id: 4, name: "Charmander" },
-    { id: 5, name: "Charmeleon" },
-    { id: 6, name: "Charizard" },
-    { id: 7, name: "Squirtle" },
-    { id: 8, name: "Wartortle" },
-    { id: 9, name: "Blastoise" },
-  ];
+  const { data, isLoading, isError } = useQuery("pokemonList", () => {
+    return fetch(`https://pokeapi.co/api/v2/pokemon-species?limit=10000`)
+      .then((res) => res.json())
+      .then((data) =>
+        data.results.map((pkmn: { name: string }, i: number) => {
+          return { id: i + 1, name: pkmn.name };
+        })
+      );
+  });
+
+  return { data, isLoading, isError };
 };

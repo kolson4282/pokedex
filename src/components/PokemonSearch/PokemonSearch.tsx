@@ -7,6 +7,9 @@ const PokemonSearch = () => {
   const navigate = useNavigate();
   const [id, setId] = useState("1");
   const pokemon = usePokemonList();
+
+  if (pokemon.isLoading) return <p>Loading...</p>;
+
   return (
     <div
       style={{
@@ -19,7 +22,10 @@ const PokemonSearch = () => {
       <Select
         label="Search"
         onChange={(e) => setId(e.target.value)}
-        options={pokemon.map((pkmn) => ({ value: pkmn.id, label: pkmn.name }))}
+        options={pokemon.data.map((pkmn: { id: number; name: string }) => ({
+          value: pkmn.id,
+          label: pkmn.name,
+        }))}
       />
       <button onClick={() => navigate(`/pokemon/${id}`)}>Go</button>
     </div>
